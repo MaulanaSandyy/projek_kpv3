@@ -12,8 +12,13 @@ require "../config/functions.php";
 
 $tgl1 = $_GET['tgl1'];
 $tgl2 = $_GET['tgl2'];
-$dataBeli = getData("SELECT * FROM beli_head WHERE tgl_beli BETWEEN '$tgl1' AND '$tgl2'");
 
+$dataBeli = getData("
+  SELECT bh.*, s.nama AS nama_supplier 
+  FROM beli_head bh 
+  LEFT JOIN supplier s ON bh.suplier = s.id_supplier 
+  WHERE bh.tgl_beli BETWEEN '$tgl1' AND '$tgl2'
+");
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +68,7 @@ $dataBeli = getData("SELECT * FROM beli_head WHERE tgl_beli BETWEEN '$tgl1' AND 
                     <td><?= $no++ ?></td>
                     <td align="center"><?= in_date($data['tgl_beli']) ?></td>
                     <td align="center"><?= $data['no_beli'] ?></td>
-                    <td align="center"><?= $data['suplier'] ?></td>
+                    <td align="center"><?= htmlspecialchars($data['nama_supplier']) ?></td>
                     <td align="right"><?= number_format($data['total'],0,',','.') ?></td>
                 </tr>
 
