@@ -58,7 +58,7 @@ INSERT INTO `barang` (`id_barang`, `barcode`, `nama_barang`, `harga_beli`, `harg
 ('BRG-012', '4908123', 'paku payung 5cm', 15000, 28000, 96, 'kg', 3, 'default-brg.png'),
 ('BRG-013', '849132809', 'paku payung 7cm', 15000, 28000, 275, 'kg', 3, 'default-brg.png'),
 ('BRG-014', '132094801', 'paku gypsum', 22000, 30000, 159, 'dus/karton', 3, 'default-brg.png'),
-('BRG-015', '480321402', 'paku beton 3cm', 150, 300, 286, 'item/piece', 10, 'default-brg.png'),
+('BRG-015', '480321402', 'paku beton 3cm', 15000, 30000, 286, 'item/piece', 10, 'default-brg.png'),
 ('BRG-016', '4893210491', 'paku beton 5cm', 250, 500, 239, 'item/piece', 10, 'default-brg.png'),
 ('BRG-017', '35210840932', 'paku beton 7cm', 350, 700, 236, 'item/piece', 10, 'default-brg.png'),
 ('BRG-018', '471923794', 'paku beton 10cm', 500, 1000, 320, 'item/piece', 10, 'default-brg.png'),
