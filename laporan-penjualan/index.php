@@ -48,35 +48,49 @@ $penjualan = getData("SELECT * FROM jual_head ORDER BY tgl_jual DESC");
                 </button>
             </div>
             <div class="card-body table-responsive p-3">
+              <?php
+                $totalSemua = 0;
+                foreach ($penjualan as $jual) {
+                    $totalSemua += $jual['total'];
+                }
+              ?>
                 <table class="table table-hover text-nowrap" id="tblData">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>No Penjualan</th>
-                            <th>Tanggal Penjualan</th>
-                            <th>Customer</th>
-                            <th>Total Penjualan</th>
-                            <th style="width: 10%;" class="text-center">Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1; foreach($penjualan as $jual): ?>
-                        <tr>
-                            <td><?= $no++ ?></td>
-                            <td><?= $jual['no_jual'] ?></td>
-                            <td><?= in_date($jual['tgl_jual']) ?></td>
-                            <td><?= $jual['customer'] ?></td>
-                            <td class="text-left"><?= number_format($jual['total'],0,",",".") ?></td>
-                            <td class="text-center">
-                                <a href="detail-penjualan.php?id=<?= $jual['no_jual'] ?>&tgl=<?= in_date($jual['tgl_jual']) ?>" 
-                                   class="btn btn-sm btn-info" title="rincian barang">
-                                    Detail
-                                </a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                  <thead>
+                      <tr>
+                          <th>No</th>
+                          <th>No Penjualan</th>
+                          <th>Tanggal Penjualan</th>
+                          <th>Customer</th>
+                          <th>Total Penjualan</th>
+                          <th style="width: 10%;" class="text-center">Opsi</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <?php $no = 1; foreach($penjualan as $jual): ?>
+                      <tr>
+                          <td><?= $no++ ?></td>
+                          <td><?= $jual['no_jual'] ?></td>
+                          <td><?= in_date($jual['tgl_jual']) ?></td>
+                          <td><?= $jual['customer'] ?></td>
+                          <td class="text-left"><?= number_format($jual['total'],0,",",".") ?></td>
+                          <td class="text-center">
+                              <a href="detail-penjualan.php?id=<?= $jual['no_jual'] ?>&tgl=<?= in_date($jual['tgl_jual']) ?>" 
+                                class="btn btn-sm btn-info" title="rincian barang">
+                                  Detail
+                              </a>
+                          </td>
+                      </tr>
+                      <?php endforeach; ?>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <th colspan="4" class="text-right">Total Keseluruhan:</th>
+                          <th class="text-left">Rp. <?= number_format($totalSemua, 0, ",", ".") ?></th>
+                          <th></th>
+                      </tr>
+                  </tfoot>
+              </table>
+
             </div>
         </div>
     </div>
