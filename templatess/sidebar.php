@@ -20,7 +20,7 @@ ob_start();
         <img src="<?= $main_url ?>assets/images/<?= userlogin()['foto'] ?>" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block text-white"><?= userLogin()['username'] ?></a>
+        <a href="<?= $main_url ?>dashboard.php" class="d-block text-white"><?= userLogin()['username'] ?></a>
       </div>
     </div>
 
