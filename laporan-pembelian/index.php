@@ -51,6 +51,12 @@ $pembelian = getData("SELECT bh.*, s.nama AS nama_suplier FROM beli_head bh
                 </button>
             </div>
             <div class="card-body table-responsive p-3">
+              <?php
+                $totalKeseluruhan = 0;
+                foreach($pembelian as $beli){
+                    $totalKeseluruhan += $beli['total'];
+                }
+              ?>
                 <table class="table table-hover text-nowrap" id="tblData">
                     <thead>
                         <tr>
@@ -79,7 +85,15 @@ $pembelian = getData("SELECT bh.*, s.nama AS nama_suplier FROM beli_head bh
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
+                    <tfoot>
+                      <tr>
+                          <th colspan="4" class="text-right">Total Keseluruhan:</th>
+                          <th class="text-left">Rp. <?= number_format($totalKeseluruhan, 0, ",", ".") ?></th>
+                          <th></th>
+                      </tr>
+                  </tfoot>
                 </table>
+                
             </div>
         </div>
     </div>

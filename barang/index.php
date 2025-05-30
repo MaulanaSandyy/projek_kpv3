@@ -128,8 +128,6 @@ if($msg == 'updated'){
                                                 title="Hapus Barang">
                                                 <i class="fas fa-trash"></i>
                                             </a>
-
-
                                         </td>
                                     </tr>
 
