@@ -124,3 +124,39 @@ function simpanJual($data){
 
     return mysqli_affected_rows($koneksi);
 }
+
+// Tambahkan fungsi ini di mode-jual.php
+function updateQtyJual($data) {
+    global $koneksi;
+
+    $no_jual = mysqli_real_escape_string($koneksi, $data['no_jual']);
+    $barcode = mysqli_real_escape_string($koneksi, $data['barcode']);
+    $new_qty = (int)$data['new_qty'];
+    
+    // Ambil data lama
+    $old_data = mysqli_query($koneksi, "SELECT qty, harga_jual FROM jual_detail WHERE no_jual = '$no_jual' AND barcode = '$barcode'");
+    $row = mysqli_fetch_assoc($old_data);
+    $old_qty = $row['qty'];
+    $harga = $row['harga_jual'];
+    
+    // Hitung selisih qty
+    $qty_diff = $new_qty - $old_qty;
+    
+    // Cek stok tersedia
+    $stok = mysqli_query($koneksi, "SELECT stock FROM barang WHERE barcode = '$barcode'");
+    $stok_row = mysqli_fetch_assoc($stok);
+    $current_stock = $stok_row['stock'];
+    
+    if ($qty_diff > $current_stock) {
+        return false; // Stok tidak mencukupi
+    }
+    
+    // Update qty dan jumlah harga
+    $jml_harga = $new_qty * $harga;
+    mysqli_query($koneksi, "UPDATE jual_detail SET qty = $new_qty, jml_harga = $jml_harga WHERE no_jual = '$no_jual' AND barcode = '$barcode'");
+    
+    // Update stok barang
+    mysqli_query($koneksi, "UPDATE barang SET stock = stock - $qty_diff WHERE barcode = '$barcode'");
+    
+    return mysqli_affected_rows($koneksi);
+}
