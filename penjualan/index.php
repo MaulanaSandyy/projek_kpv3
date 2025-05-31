@@ -346,18 +346,7 @@ $barang_list = getData($query_barang);
                                     <td><?= $detail['barcode'] ?></td>
                                     <td><?= $detail['nama_brg'] ?></td>
                                     <td class="text-right"><?= number_format($detail['harga_jual'], 0,',','.') ?></td>
-                                    <td class="text-right"><?= $detail['qty'] ?>
-                                        <!-- Tombol Edit -->
-                                        <a href="#" 
-                                            class="btn btn-sm btn-warning btn-edit-qty ml-3" 
-                                            data-idjual="<?= $detail['no_jual'] ?>" 
-                                            data-barcode="<?= $detail['barcode'] ?>" 
-                                            data-qty="<?= $detail['qty'] ?>" 
-                                            data-tgl="<?= $detail['tgl_jual'] ?>" 
-                                            title="Edit jumlah">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
+                                    <td class="text-right"><?= $detail['qty'] ?></td>
                                     <td class="text-right"><?= number_format($detail['jml_harga'], 0,',','.') ?></td>
                                     <td class="text-center">
                                         <!-- Tombol Hapus -->
@@ -523,97 +512,9 @@ $barang_list = getData($query_barang);
             </div>
         </div>
     </div>
-
-    <!-- model edit qty -->
-    <div class="modal fade" id="modalEditQty" tabindex="-1" role="dialog" aria-labelledby="modalEditQtyLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditQtyLabel">Edit Jumlah Barang</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formEditQty">
-                        <input type="hidden" name="no_jual" id="edit_no_jual">
-                        <input type="hidden" name="barcode" id="edit_barcode">
-                        <input type="hidden" name="tgl" id="edit_tgl">
-                        <div class="form-group">
-                            <label for="edit_qty">Jumlah Barang</label>
-                            <input type="number" class="form-control text-right" name="new_qty" id="edit_qty" min="1" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveEditQty">Simpan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     
     <script>
-
-        //script edit qty walaupun sudah di table
-        $(document).ready(function() {
-            // Handle klik tombol edit
-            $(document).on('click', '.btn-edit-qty', function() {
-                const no_jual = $(this).data('idjual');
-                const barcode = $(this).data('barcode');
-                const qty = $(this).data('qty');
-                const tgl = $(this).data('tgl');
-                
-                // Isi form modal
-                $('#edit_no_jual').val(no_jual);
-                $('#edit_barcode').val(barcode);
-                $('#edit_qty').val(qty);
-                $('#edit_tgl').val(tgl);
-                
-                $('#modalEditQty').modal('show');
-            });
-            
-            // Handle simpan edit qty
-            $('#btnSaveEditQty').click(function() {
-                const formData = $('#formEditQty').serialize();
-                
-                $.ajax({
-                    url: '../module/update-qty.php',
-                    method: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        if(response.success) {
-                            // Refresh halaman untuk update tampilan
-                            const tgl = $('#edit_tgl').val();
-                            window.location.href = 'index.php?tgl=' + tgl;
-                        } else {
-                            alert('Gagal update qty: ' + response.message);
-                        }
-                    },
-                    error: function() {
-                        alert('Terjadi kesalahan saat update qty');
-                    }
-                });
-            });
-        });
-
-        //script untuk modal alert
-        $(document).ready(function () {
-            $('.btn-delete-detail').on('click', function () {
-                const nama = $(this).data('nama');
-                const barcode = $(this).data('barcode');
-                const idjual = $(this).data('idjual');
-                const qty = $(this).data('qty');
-                const tgl = $(this).data('tgl');
-
-                $('#namaDetail').text(nama);
-                $('#btnConfirmDeleteDetail').attr('href', '?barcode=' + barcode + '&idjual=' + idjual + '&qty=' + qty + '&tgl=' + tgl + '&msg=deleted');
-            });
-        });
-
-
-
+        
         // Fungsi untuk mendapatkan nilai numerik dari input yang diformat
         function getNumericValue(formattedValue) {
             // Hilangkan semua karakter non-digit dan konversi ke float
