@@ -88,6 +88,7 @@ if(isset($_POST['koreksi'])){
                     <option value="1" <?= selectUser1($level) ?>>Administrator</option>
                     <option value="2" <?= selectUser2($level) ?>>Owner</option>
                     <option value="3" <?= selectUser3($level) ?>>Kasir</option>
+                    <option value="4" <?= selectUser3($level) ?>>Karyawan</option>
                 </select>
               </div>
               <div class="form-group">

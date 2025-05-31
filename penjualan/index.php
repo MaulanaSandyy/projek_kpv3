@@ -514,6 +514,20 @@ $barang_list = getData($query_barang);
     </div>
     
     <script>
+
+        //script untuk modal alert
+        $(document).ready(function () {
+            $('.btn-delete-detail').on('click', function () {
+                const nama = $(this).data('nama');
+                const barcode = $(this).data('barcode');
+                const idjual = $(this).data('idjual');
+                const qty = $(this).data('qty');
+                const tgl = $(this).data('tgl');
+
+                $('#namaDetail').text(nama);
+                $('#btnConfirmDeleteDetail').attr('href', '?barcode=' + barcode + '&idjual=' + idjual + '&qty=' + qty + '&tgl=' + tgl + '&msg=deleted');
+            });
+        });
         
         // Fungsi untuk mendapatkan nilai numerik dari input yang diformat
         function getNumericValue(formattedValue) {

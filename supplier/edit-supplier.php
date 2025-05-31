@@ -230,11 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Validasi sebelum submit form
   document.getElementById('formSupplier').addEventListener('submit', function(e) {
     const produkItems = document.querySelectorAll('.produk-item');
-    if(produkItems.length === 0) {
-      e.preventDefault();
-      alert('Supplier harus memiliki minimal satu produk yang dijual!');
-      return false;
-    }
     return true;
   });
 });
