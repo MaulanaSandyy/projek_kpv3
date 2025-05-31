@@ -400,22 +400,19 @@ $noBeli = generateNo();
         document.getElementById('resetBtn').addEventListener('click', function() {
             const noBeli = document.getElementById('noNota').value;
             const tgl = document.getElementById('tglNota').value;
-                
-            if(confirm('Anda yakin akan mereset semua pembelian?')) {
-                fetch(`reset-pembelian.php?no_beli=${noBeli}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            window.location.href = `index.php?tgl=${tgl}`;
-                        } else {
-                            alert('Gagal mereset pembelian');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Terjadi kesalahan saat mereset pembelian');
-                    });
-            }
+            fetch(`reset-pembelian.php?no_beli=${noBeli}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = `index.php?tgl=${tgl}`;
+                    } else {
+                        alert('Gagal mereset pembelian');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat mereset pembelian');
+                });
         });
     });
   </script>
